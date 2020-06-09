@@ -1,0 +1,52 @@
+body {
+    background-color: #FAFAFA;
+}
+
+label {
+    font-weight: 500;
+}
+
+thead {
+    background-color: black;
+    color: white;
+}
+
+.total {
+    font-weight: 700;
+    font-size: 1.5rem;
+}
+
+.subtotal {
+    font-size: 1.3rem;
+}
+
+.box {
+    background-color: white;
+    box-shadow: 3px 3px 10px -5px #888888;
+    border: 1px solid black;
+    border-radius: 5px;
+}
+
+.navbar {
+    background-color: black;
+}
+
+.button {
+    width: 100px;
+}
+
+.md-button {
+    width: 70px
+}
+
+.center {
+    margin: auto;
+}
+
+.height {
+    line-height: 230%;
+}
+
+.filter-header {
+    font-weight: 500;
+}

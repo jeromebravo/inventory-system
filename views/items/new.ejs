@@ -1,0 +1,51 @@
+<%- include("../partials/header") %>
+
+<div class="container my-4">
+    <div class="row">
+        <div class="col-8 col-md-6 col-lg-4 m-auto box p-4">
+            <h5 class="card-title text-center">NEW ITEM</h5>
+            <hr>
+            <form action="/items" method="POST">
+                <div class="form-group">
+                    <label for="brand">Brand <span class="text-danger">*</span></label>
+                    <input type="text" class="form-control" id="brand" name="brand" required>
+                </div>
+                <div class="form-group">
+                    <label for="name">Name <span class="text-danger">*</span></label>
+                    <input type="text" class="form-control" id="name" name="name" required>
+                </div>
+                <div class="form-group">
+                    <label for="category">Category <span class="text-danger">*</span></label>
+                    <input type="text" class="form-control" id="category" name="category" required>
+                </div>
+                <div class="form-group">
+                    <label for="price">Price <span class="text-danger">*</span></label>
+                    <input type="number" class="form-control" id="price" name="price" required>
+                </div>
+                <div class="form-group">
+                    <label for="stocks">Stocks <span class="text-danger">*</span></label>
+                    <input type="number" class="form-control" id="stocks" name="stocks" required>
+                </div>
+                <div class="form-group">
+                    <label for="image">Image <span class="text-danger">*</span></label>
+                    <input type="text" class="form-control" id="image" name="image" required>
+                </div>
+                <button class="btn btn-primary button" type="submit">Submit</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script>
+    $("#image").on("change", function(){
+        var fileName = $(this).val();
+        fileName = split(fileName)
+        $(this).next(".custom-file-label").html(fileName);
+    });
+
+    function split(str){
+        return str.split("\\").pop().split("/").pop();
+    }
+</script>
+
+<%- include("../partials/footer") %>

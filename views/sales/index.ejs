@@ -1,0 +1,82 @@
+<%- include("../partials/header") %>
+
+<div class="container my-4">
+    <div class="row">
+        <div class="col-12">
+            <h4>SALES REPORT</h4>
+            <hr>
+        </div>
+
+        <div class="col-3">
+            <div class="card">
+                <div class="card-body">
+                    <p class="lead">GENERATE REPORT</p>
+                    <hr>
+                    <form action="/sales" method="POST">
+                        <div class="form-group">
+                            <label for="from">From <span class="text-danger">*</span></label>
+                            <input class="form-control" type="date" name="from" id="from" value="<%= from %>" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="to">To <span class="text-danger">*</span></label>
+                            <input class="form-control" type="date" name="to" id="to" value="<%= to %>" required>
+                        </div>
+                        <button class="btn btn-primary btn-block" type="submit">Submit</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-9 mx-auto">
+            <div class="row">
+                <div class="col-6 text-center">
+                    <div class="card">
+                        <div class="card-body">
+                            <h1 class="card-title"><%= orders.length %></h1>
+                            <p class="card-text">Delivered Orders</p>
+                        </div>
+                    </div>
+                </div>
+    
+                <div class="col-6 text-center">
+                    <div class="card">
+                        <div class="card-body">
+                            <% let total = 0; %>
+                            <% for(let order of orders) { %>
+                                <% total += order.total; %>
+                            <% } %>
+                            <h1 class="card-title">₱<%= total %>.00</h1>
+                            <p class="card-text">Total Sales</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-12">
+                    <hr>
+                    <h5>ORDERS</h5>
+                    <table class="table table-striped text-center mt-3">
+                        <thead>
+                          <tr>
+                            <th scope="col">Date</th>
+                            <th scope="col">Total</th>
+                            <th scope="col">Action</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                            <% for(let order of orders) { %>
+                                <tr>
+                                    <% let date = new Date(order.deliveredDate) %>
+                                    <td><%= date.getMonth() + 1 %>/<%= date.getDate() %>/<%= date.getFullYear() %></td>
+                                    <td>₱<%= order.total %>.00</td>
+                                    <td><a href="/sales/<%= order._id %>">More Info</a></td>
+                                </tr>
+                            <% } %>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<%- include("../partials/footer") %>

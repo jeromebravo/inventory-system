@@ -1,0 +1,39 @@
+<%- include("../partials/header") %>
+
+<div class="container my-4">
+    <div class="row">
+        <div class="col-4 m-auto">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title text-center">EDIT ITEM</h5>
+                    <hr>
+                    <form action="/items/<%= item._id %>?_method=PUT" method="POST">
+                        <div class="form-group">
+                            <label for="brand">Brand <span class="text-danger">*</span></label>
+                            <input type="text" class="form-control" id="brand" name="brand" value="<%= item.brand %>" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="name">Name <span class="text-danger">*</span></label>
+                            <input type="text" class="form-control" id="name" name="name" value="<%= item.name %>" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="category">Category <span class="text-danger">*</span></label>
+                            <input type="text" class="form-control" id="category" name="category" value="<%= item.category %>" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="price">Price <span class="text-danger">*</span></label>
+                            <input type="number" class="form-control" id="price" name="price" value="<%= item.price %>" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="image">Image <span class="text-danger">*</span></label>
+                            <input type="text" class="form-control" id="image" name="image" value="<%= item.image %>" required>
+                        </div>
+                        <button class="btn btn-primary button" type="submit">Update</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<%- include("../partials/footer") %>

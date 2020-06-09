@@ -1,0 +1,67 @@
+<%- include("../partials/header") %>
+
+<div class="container my-4">
+    <div class="row">
+        <div class="col-10 box d-md-flex py-3 m-auto">
+            <div class="col-md-5">
+                <img class="img-fluid" src="<%= item.image %>">
+            </div>
+    
+            <div class="col-md-7">
+                <div class="col-12">
+                    <h1><%= item.brand %></h1>
+                    <h4><%= item.name %></h4>
+                    <p>Category: <%= item.category %></p>
+                    <p>Price: ₱<%= item.price %>.00</p>
+                    <p>Stocks: <%= item.stocks %></p>
+                    <hr>
+                </div>
+
+                <div class="col-12">
+                    <a class="btn btn-primary mr-2" href="/items/<%= item._id %>/stocks">Add stocks</a>
+                    <form class="d-inline float-right" action="/items/<%= item._id %>?_method=DELETE" method="POST">
+                        <button class="btn btn-danger md-button" type="submit">Delete</button>
+                    </form>
+                    <a class="btn btn-warning mr-2 float-right md-button" href="/items/<%= item._id %>/edit">Edit</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6 mr-auto mt-4 stocks p-3">
+            <hr>
+            <h5>Recent added stocks</h5>
+            <hr>
+            <% const stocks = item.addStocks.reverse(); %>
+            <% let length = 20; %>
+            <% if(stocks.length < length) { %>
+                <% length = stocks.length; %>
+            <% } %>
+            
+            <% let i = 0; %>
+            <% while(i < length) { %>
+                <% let stock = stocks[i]; %>
+                <% let date = new Date(stock.dateCreated) %>
+                <p>
+                    <%= date.getMonth() + 1 %>/<%= date.getDate() %>/<%= date.getFullYear() %>
+                    <span class="float-right">+<%= stock.quantity %></span>
+                </p>
+                <% i++; %>
+            <% } %>
+        </div>
+
+        <div class="col-md-6 ml-auto mt-4 stocks p-3">
+            <hr>
+            <h5>Recent orders</h5>
+            <hr>
+            <% for(let order of orders) { %>
+                <p>
+                    <% let date = new Date(order.date); %>
+                    <%= date.getMonth() + 1 %>/<%= date.getDate() %>/<%= date.getFullYear() %>
+                    <span class="float-right">-<%= order.quantity %></span>
+                </p>
+            <% } %>
+        </div>
+    </div>
+</div>
+
+<%- include("../partials/footer") %>
