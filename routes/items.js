@@ -6,8 +6,23 @@ const express = require("express"),
 
 // INDEX
 router.get("/", auth.isLoggedIn, async function(req, res) {
-    const items = await Items.find({});
+    let items;
     const categories = await Items.find({}).distinct("category");
+
+    if(req.query.search === undefined) {
+        // GET ALL ITEMS
+        items = await Items.find({});
+    } else {
+        // SEARCH ITEM
+        items = await Items.find({keywords: req.query.search.toLowerCase()});
+    }
+    
+    // NO ITEM FOUND
+    if(items.length === 0) {
+        req.flash("error", "No item found");
+        return res.redirect("/items");
+    }
+
     res.render("items/index", {items, categories});
 });
 
@@ -145,12 +160,6 @@ router.delete("/:id", auth.isLoggedIn, async function(req, res) {
         req.flash("error", "Something went wrong");
         res.redirect("/items");
     }
-});
-
-// SEARCH ITEM
-router.post("/search", auth.isLoggedIn, async function(req, res) {
-    let items = await Items.find({keywords: req.body.search.toLowerCase()});
-    res.render("items/index", {items});
 });
 
 // ==================
