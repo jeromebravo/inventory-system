@@ -14,7 +14,7 @@ const indexRoutes = require("./routes/index"),
       orderRoutes = require("./routes/orders")
       salesRoutes = require("./routes/sales");
 
-mongoose.connect(process.env.DATABASEURL, {useNewUrlParser: true, useUnifiedTopology: true});
+mongoose.connect("mongodb://localhost/battery_shop", {useNewUrlParser: true, useUnifiedTopology: true});
 mongoose.set("useFindAndModify", false);
 app.set("view engine", "ejs");
 app.use(express.static(__dirname + "/public"));
